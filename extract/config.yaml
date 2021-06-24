@@ -1,0 +1,17 @@
+﻿news_sites:
+  radiobiobio:
+    url: 'https://www.biobiochile.cl'
+    queries:
+      homepage_categories: '.nav-link'
+      news_categories: '.article-text-container>a'
+      article_title: '.post-title'
+      article_body: '.post-content'
+#  eluniversal:
+#    url: 'https://www.eluniversal.com.mx/'
+#    queries:
+#      homepage_categories: ''
+#      news_categories: '.field-content a'
+#      article_title: '.pane-content h1'
+#      article_body: '.field-name-body'
+
+  

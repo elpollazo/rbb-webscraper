@@ -18,7 +18,7 @@ def _extract():
 	logger.info('Starting extract process')
 	for new_site_uid in news_sites_uid:
 	    subprocess.run(['python', 'main.py', '{}'.format(new_site_uid)], cwd='./extract')
-	    subprocess.run(['move', '{}*'.format(new_site_uid), r'..\transform'], shell=True, cwd='./extract')
+	    subprocess.run(['mv', '{}*'.format(new_site_uid), r'..\transform'], shell=True, cwd='./extract')
 
 def _transform():
     logger.info('Starting transform process')
@@ -27,15 +27,15 @@ def _transform():
         dirty_data_filename = _get_valid_data_filename(new_site_uid, './transform', type='dirty')
         subprocess.run(['python', 'newspaper_receipe.py', '{}'.format(dirty_data_filename)], cwd='./transform')
         clean_data_filename = _get_valid_data_filename(new_site_uid, './transform', type='clean')
-        subprocess.run(['move', '{}'.format(clean_data_filename), r'..\load'], shell=True, cwd='./transform')
-        subprocess.run(['del', '{}'.format(dirty_data_filename)], shell=True, cwd='./transform')
+        subprocess.run(['mv', '{}'.format(clean_data_filename), r'..\load'], shell=True, cwd='./transform')
+        subprocess.run(['rm', '{}'.format(dirty_data_filename)], shell=True, cwd='./transform')
 
 def _load():
     logger.info('Starting load process')
     for new_site_uid in news_sites_uid:
         clean_data_filename = _get_valid_data_filename(new_site_uid, './load', type='clean')
         subprocess.run(['python', 'main.py', '{}'.format(clean_data_filename)], cwd='./load')
-        subprocess.run(['del', '{}'.format(clean_data_filename)], shell=True, cwd='./load')
+        subprocess.run(['rm', '{}'.format(clean_data_filename)], shell=True, cwd='./load')
         logger.info('Data loaded into DB')
 
 def _get_valid_data_filename(new_site_uid, wd, type='dirty'):

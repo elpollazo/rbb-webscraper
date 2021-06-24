@@ -37,7 +37,7 @@ def _news_scrapper(news_site_uid):
         for link in homepage.get_links:
             category_homepage = _fetch_element(news_site_uid, host, link, 'category')
             if category_homepage:
-                logging.info('Category fetched! lel')
+                logging.info('Category fetched!')
                 category_host.append(category_homepage)
             else:
                 logging.info('Theres no category link')

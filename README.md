@@ -11,7 +11,7 @@ Libraries used in this web scraper will be installed on "install.sh". The librar
 - Pandas.
 - Beautiful Soup.
 - SQL Alchemy.
-- 
+
 Ussage:
 
 1. Clone this repository: git clone https://github.com/elpollazo/rbb-webscraper

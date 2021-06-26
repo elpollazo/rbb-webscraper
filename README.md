@@ -11,10 +11,13 @@ Libraries used in this web scraper will be installed on "install.sh". The librar
 - Pandas.
 - Beautiful Soup.
 - SQL Alchemy.
+- NLTK.
 
 Ussage:
 
 1. Clone this repository: git clone https://github.com/elpollazo/rbb-webscraper
 2. Execute installer file: ./install.sh
-3. Insert your mysql-server credentials on ./load/database_config.yaml file (User, Password, Port, Host).
-4. To start ETL process type in the project directory: python3 pipeline.py 
+4. Insert your MySQL-server credentials on ./load/database_config.yaml file (User, Password, Port, Host, Database name). Database specified in this configuration file must be created if not exists in MySQL server. User must be different than root.
+6. To start ETL process: python3 pipeline.py 
+
+Note: ETL proccess will take a while.

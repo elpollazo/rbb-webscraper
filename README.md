@@ -1,5 +1,5 @@
 # rbb-webscraper
-This webscraper was used to extract article news from the oficial site of radiobiobio (http://www.biobiochile.cl/) and store them in a MySQL database. Tested on Linux.
+This web scraper was used to extract article news from the oficial site of radiobiobio (http://www.biobiochile.cl/) and store them in a MySQL database. Tested on Linux.
 
 Requirements:
 - PIP installed.

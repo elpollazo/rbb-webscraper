@@ -7,6 +7,9 @@ import hashlib
 import nltk
 from nltk.corpus import stopwords
 
+nltk.download('stopwords')
+nltk.download('punkt')
+
 logging.basicConfig(level = logging.INFO)
 
 logger = logging.getLogger(__name__)

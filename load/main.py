@@ -1,8 +1,11 @@
 import argparse
 import logging
 import pandas as pd
-import pyodbc
 from article import Article
+import yaml
+
+with open('database_config.yaml', mode='r', encoding='utf-8') as f:
+    __config = yaml.load(f)
 
 from base import engine, Session, Base
 
@@ -16,7 +19,6 @@ def main(filename):
     articles = pd.read_csv(filename)
     connection = engine.raw_connection()
     cursor = connection.cursor()
-    #cursor.execute('DROP TABLE IF EXISTS articles;')
     Base.metadata.create_all(engine)
     session = Session()
 

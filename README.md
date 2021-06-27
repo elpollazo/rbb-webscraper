@@ -1,7 +1,7 @@
 # rbb-webscraper
 This web scraper was used to extract article news from the oficial site of radiobiobio (http://www.biobiochile.cl/) and store them in a MySQL database. Tested on Linux.
 
-Requirements:
+## Requirements:
 - PIP installed.
 - MySQL installed.
 
@@ -13,7 +13,7 @@ Libraries used in this web scraper will be installed on "install.sh". The librar
 - SQL Alchemy.
 - NLTK.
 
-Ussage:
+## Ussage:
 
 1. Clone this repository: git clone https://github.com/elpollazo/rbb-webscraper
 2. Execute installer file: ./install.sh

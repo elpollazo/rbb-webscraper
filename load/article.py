@@ -2,6 +2,8 @@ from sqlalchemy import Column, String, Integer, Text
 
 from base import Base 
 
+"""This module defines the data type of the columns used to store the data in the database. Article object is required in main.py module"""
+
 class Article(Base):
     __tablename__ = 'articles'
 

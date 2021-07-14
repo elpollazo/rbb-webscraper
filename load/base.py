@@ -3,6 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import yaml
 
+"""This module set the paramaters and credentials used to database connection"""
+
 with open('database_config.yaml', mode='r', encoding='utf-8') as f:
     __config = yaml.load(f)
 

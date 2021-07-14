@@ -1,19 +1,11 @@
 import argparse
-
 import logging 
-
 from common import config
-
 import news_page_objects as news
-
 import re
-
 from requests.exceptions import HTTPError
-
 from urllib3.exceptions import MaxRetryError
-
 import datetime
-
 import csv
 
 logging.basicConfig(level = logging.INFO)
@@ -25,6 +17,9 @@ is_root_path = re.compile(r'^/.+$') #/texto
 not_valid_link = re.compile(r'^https?://\[.+\]$')
 
 def _news_scrapper(news_site_uid):
+    """This function does the scraping process, searching first for all news categories and get the links. Finally does the scrape to every news category
+    extracting the title and body from every article in every single category"""
+    
     host = config()['news_sites'][news_site_uid]['url']
     logging.info('Beginning scrapprer for {}'.format(host))
     newspage = news.NewsPage(host, news_site_uid)
@@ -37,14 +32,14 @@ def _news_scrapper(news_site_uid):
         for link in homepage.get_links:
             category_homepage = _fetch_element(news_site_uid, host, link, 'category')
             if category_homepage:
-                logging.info('Category fetched!')
+                logging.info('Category fetched')
                 category_host.append(category_homepage)
             else:
-                logging.info('Theres no category link')
+                logging.info('There is no category link')
 
         for category in category_host:
             if not category.get_links:
-    	        logging.warning('This page doesnt have format articles')
+    	        logging.warning('This page does not have format articles')
             else:
                 for article_link in category.get_links:
                     article = _fetch_element(news_site_uid, host, article_link, 'article')
@@ -73,6 +68,7 @@ def _news_scrapper(news_site_uid):
     _save_articles(articles, news_site_uid)
 
 def _fetch_element(news_site_uid, host, link, element):
+    """This function fetchs an Article - Category object page. If the request goes wrong it will return a 'None' value"""
     if element == 'article':
         logger.info('Start fetching article at {}'.format(link))
     elif element == 'category':
@@ -100,6 +96,7 @@ def _fetch_element(news_site_uid, host, link, element):
         return category_homepage
 
 def _save_articles(articles, news_site_uid): 
+    """This function store the extracted data to a csv file in ./extract folder"""
 
     now = datetime.datetime.now().strftime('%Y_%m_%d')
     out_file_name = '{site}_{date}_articles.csv'.format(site=news_site_uid,date=now)
@@ -117,6 +114,7 @@ def _save_articles(articles, news_site_uid):
     logging.info('Articles saved at {}'.format(out_file_name))
 
 def _build_link(host, link):
+    """This function returns a valid link to make a request"""
 
     if not_valid_link.match(link):
     	return '{}'.format(host)
@@ -131,7 +129,7 @@ if __name__ == '__main__':
 
     news_site_choices = list(config()['news_sites'].keys())
     parser = argparse.ArgumentParser()
-    parser.add_argument('news_site', help='Sitio de noticias a scrappear',
+    parser.add_argument('news_site', help='Website to scrape.',
     	type=str, choices=news_site_choices)
     args = parser.parse_args()
     _news_scrapper(args.news_site)

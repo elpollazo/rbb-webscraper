@@ -16,12 +16,14 @@ def main():
     logger.info('ETL process done')
 
 def _extract():
+    """This function executes the extract module. The uncleaned data extracted will be moved to ./transform folder"""
     logger.info('Starting extract process')
     for new_site_uid in news_sites_uid:
         subprocess.run(['python3', 'main.py', '{}'.format(new_site_uid)], cwd='./extract')
         os.system(f'mv ./extract/{new_site_uid}* ./transform')
 
 def _transform():
+    """This function executes de transform module. The cleaned data will be moved to ./load folder"""
     logger.info('Starting transform process')
 
     for new_site_uid in news_sites_uid:
@@ -32,6 +34,7 @@ def _transform():
         os.system(f'rm ./transform/{dirty_data_filename}')
 
 def _load():
+    """This function executes de transform module. The cleaned data will be stored on MySQL database specified on the load configuration"""
     logger.info('Starting load process')
     for new_site_uid in news_sites_uid:
         clean_data_filename = _get_valid_data_filename(new_site_uid, './load', type='clean')
@@ -40,6 +43,7 @@ def _load():
         logger.info('Data loaded into DB')
 
 def _get_valid_data_filename(new_site_uid, wd, type='dirty'):
+    """This function scan the current work directory and returns the data file exported in every module"""
     logger.info('Scanning current work directory')
 
     if type=='dirty':

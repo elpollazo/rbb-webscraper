@@ -28,7 +28,7 @@ class HomePage(NewsPage):
 
     @property
     def get_links(self):
-        """Gets the category/article links to do the scrape""""
+        """Gets the category/article links to do the scrape"""
         categories_links_list = []
         for link in self._select(self._queries['homepage_categories']):
             if link and link.has_attr('href'):

@@ -3,12 +3,9 @@ import logging
 import pandas as pd
 from article import Article
 import yaml
-
-with open('database_config.yaml', mode='r', encoding='utf-8') as f:
-    __config = yaml.load(f)
-
 from base import engine, Session, Base
 
+"""This module loads the clean data to a MySQL database"""
 
 logging.basicConfig(level = logging.INFO)
 
